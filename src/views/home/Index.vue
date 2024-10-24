@@ -1,15 +1,33 @@
 <template>
-  <div>
-    Home
+	<div>
+		Home
 
-    <div>{{ userStore.name }}</div>
-  </div>
+		<div>{{ userStore.name }}</div>
+	</div>
 </template>
 
 <script setup lang="ts">
 import { useUserStoreHook } from '@/store/user';
 
 const userStore = useUserStoreHook();
+const a = 1;
+console.log(a);
+const b = 1;
+console.log(b);
+fetch('/mock/api/login', {
+	method: 'POST'
+}).then(async (res: any) => {
+	const data = await res.json();
+	console.log(data);
+});
 </script>
 
-<style scoped></style>
+<style scoped lang="less">
+.home {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	flex-direction: column;
+}
+</style>
