@@ -6,7 +6,7 @@ import eslintConfigPrettier from 'eslint-config-prettier'; // 新增
 
 export default [
 	{
-		ignores: ['**/node_modules', '**/dist', '**/output', '.vscode', '/public']
+		ignores: ['**/node_modules', '**/dist', '**/output', '.vscode', '/public', '.stylelintrc.js']
 	},
 	{
 		files: ['**/*.{js,mjs,cjs,ts,vue}']
