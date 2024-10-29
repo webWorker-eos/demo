@@ -1,4 +1,5 @@
 export interface IUserState {
-  name: string;
-  age: number;
+	name: string;
+	coin: number;
+	usdt: number;
 }

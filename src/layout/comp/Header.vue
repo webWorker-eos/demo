@@ -10,18 +10,72 @@
 				<span class="nav" @click="$router.push('/play')">Play</span>
 				<span class="nav" @click="$router.push('/nftMarket')">NFT-Market</span>
 				<span class="nav" @click="$router.push('/miniGames')">Mini-Games</span>
-				<!-- <span class="nav" @click="$router.push('/about')">About</span> -->
 			</div>
 		</div>
-		<div>
-			<el-button type="primary" class="btn">链接钱包</el-button>
+		<div class="tools">
+			<template v-if="userStore.name">
+				<div class="coinBal">
+					<img src="@/assets/svg/Coin.svg" class="coin" />
+					<span>{{ userStore.coin }}</span>
+				</div>
+				<el-dropdown split-button type="primary" class="dropdown">
+					{{ userStore.name }}
+					<template #dropdown>
+						<el-dropdown-menu>
+							<el-dropdown-item
+								><div class="mobileNav" @click="$router.push('/')">Home</div></el-dropdown-item
+							>
+							<el-dropdown-item
+								><div class="mobileNav" @click="$router.push('/play')">Play</div></el-dropdown-item
+							>
+							<el-dropdown-item
+								><div class="mobileNav" @click="$router.push('/nftMarket')">
+									NFT-Market
+								</div></el-dropdown-item
+							>
+							<el-dropdown-item
+								><div class="mobileNav" @click="$router.push('/miniGames')">
+									Mini-Games
+								</div></el-dropdown-item
+							>
+							<el-dropdown-item>
+								<el-button type="danger" class="btn" @click="handleLogout">断开链接</el-button>
+							</el-dropdown-item>
+						</el-dropdown-menu>
+					</template>
+				</el-dropdown>
+			</template>
+			<el-button v-else type="primary" class="btn" @click="handleLogin">链接钱包</el-button>
 		</div>
 	</div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { connectWallet, getBalanceCoin } from '@/api/user';
+import { useUserStoreHook } from '@/store/user';
+const userStore = useUserStoreHook();
+const handleLogin = async () => {
+	const res = await connectWallet();
+	userStore.updateName(res.name);
+	handleGetBalanceCoin();
+};
+const handleGetBalanceCoin = async () => {
+	const res = await getBalanceCoin();
+	userStore.updateCoinBalance(res.balance);
+};
+
+const handleLogout = () => {
+	userStore.updateInit();
+};
+</script>
 
 <style scoped lang="scss">
+.mobileNav {
+	cursor: pointer;
+	width: 100%;
+	text-align: center;
+}
+
 .flex-between {
 	padding: 18px 5%;
 	width: 100%;
@@ -51,6 +105,10 @@
 		.navs {
 			margin-left: 20px;
 
+			@include responseTo(mobile) {
+				display: none;
+			}
+
 			.nav {
 				margin-right: 18px;
 				cursor: pointer;
@@ -68,9 +126,32 @@
 		}
 	}
 
-	.btn {
-		height: 40px;
-		background: var(--purple);
+	.tools {
+		display: flex;
+		gap: 20px;
+
+		.coinBal {
+			display: flex;
+			align-items: center;
+			font-size: 17px;
+
+			.coin {
+				margin-right: 5px;
+				width: 25px;
+			}
+		}
+
+		.dropdown {
+			:deep(.el-button) {
+				height: 40px;
+				background: var(--purple) !important;
+			}
+		}
+
+		.btn {
+			height: 40px;
+			background: var(--purple);
+		}
 	}
 }
 </style>
