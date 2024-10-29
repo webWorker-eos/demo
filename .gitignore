@@ -9,6 +9,7 @@ DS_Store
 .env.*.local
 *.old.*
 *.old
+package-lock.json
 
 # Log files
 npm-debug.log*

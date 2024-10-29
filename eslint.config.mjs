@@ -3,6 +3,7 @@ import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import pluginVue from 'eslint-plugin-vue';
 import eslintConfigPrettier from 'eslint-config-prettier'; // 新增
+import autoImportConfig from './.eslintrc-auto-import.json' assert { type: 'json' }; // 导入 auto-import 配置文件
 
 export default [
 	{
@@ -24,7 +25,8 @@ export default [
 		languageOptions: {
 			parserOptions: {
 				parser: tseslint.parser
-			}
+			},
+			globals: autoImportConfig.globals
 		}
 	},
 	eslintConfigPrettier, // 新增

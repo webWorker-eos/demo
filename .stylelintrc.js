@@ -7,7 +7,7 @@ module.exports = {
 		'stylelint-config-standard-vue'
 	],
 	// 添加规则插件
-	plugins: ['stylelint-order'],
+	plugins: ['stylelint-order', 'stylelint-scss'],
 	// 不同格式的文件指定自定义语法
 	overrides: [
 		{
@@ -23,6 +23,10 @@ module.exports = {
 	ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts', '**/*.json', '**/*.md', '**/*.yaml'],
 	// 自定义配置规则
 	rules: {
+		'no-descending-specificity': null,
+		'order/properties-alphabetical-order': null,
+		'scss/at-rule-no-unknown': true, // 启用 SCSS 的 at-rule 支持
+		'at-rule-no-unknown': null, // 禁用默认的 at-rule-no-unknown 规则
 		// 禁止空 source 规则
 		'no-empty-source': null,
 		// 便于配置变量 关闭未知属性检测

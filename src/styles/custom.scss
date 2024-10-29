@@ -1,0 +1,73 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+// 自定义样式
+.m05 {
+	margin: 0 5px;
+}
+
+.flex-start {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.flex-end {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.flex-between {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+/** 省略号 */
+@mixin ellipsis() {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin ellipsis2($t: 2) {
+	display: -webkit-box;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: $t;
+	-webkit-box-orient: vertical;
+}
+
+$devices: (
+	mobile: (
+		0px,
+		821px
+	),
+	pc: (
+		821px,
+		1440px
+	),
+	desktop: (
+		1440px,
+		1920px
+	)
+);
+
+@mixin responseTo($device: 'pc') {
+	$bp: map.get($devices, $device);
+
+	@if meta.type-of($bp) == 'list' {
+		@media screen and (min-width: list.nth($bp, 1)) and (max-width: list.nth($bp, 2)) {
+			@content;
+		}
+	} @else {
+		@media screen and (min-width: $bp) {
+			@content;
+		}
+	}
+}

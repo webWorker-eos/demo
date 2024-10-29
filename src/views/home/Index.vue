@@ -1,33 +1,15 @@
 <template>
-	<div>
-		Home
-
-		<div>{{ userStore.name }}</div>
+	<div class="home">
+		<div>游戏期望</div>
+		<div>玩法介绍</div>
 	</div>
 </template>
 
-<script setup lang="ts">
-import { useUserStoreHook } from '@/store/user';
+<script setup lang="ts"></script>
 
-const userStore = useUserStoreHook();
-const a = 1;
-console.log(a);
-const b = 1;
-console.log(b);
-fetch('/mock/api/login', {
-	method: 'POST'
-}).then(async (res: any) => {
-	const data = await res.json();
-	console.log(data);
-});
-</script>
-
-<style scoped lang="less">
+<style scoped lang="scss">
 .home {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100vh;
-	flex-direction: column;
+	width: 100%;
+	height: 200vh;
 }
 </style>

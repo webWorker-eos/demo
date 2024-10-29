@@ -39,24 +39,34 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
 			AutoImport({
 				// 定义需要自动引入的框架
 				imports: ['vue', 'vue-router', 'pinia'],
+				dts: fileURLToPath(new URL('./types/auto-imports.d.ts', import.meta.url)),
 				// 处理eslint
 				eslintrc: {
 					enabled: true
+					// // 生成文件地址和名称
+					// filepath: fileURLToPath(new URL('./.eslintrc-auto-import.json', import.meta.url)),
+					// globalsPropValue: true
 				},
-				resolvers: [ElementPlusResolver(), IconsResolver()],
-				dts: 'src/types/auto-imports.d.ts'
+				resolvers: [ElementPlusResolver(), IconsResolver()]
 			}),
 			Components({
 				resolvers: [ElementPlusResolver(), IconsResolver()],
-				// dts: fileURLToPath(new URL('./types/components.d.ts', import.meta.url)),
-				// dirs: [fileURLToPath(new URL('./src/components/auto', import.meta.url))],
-				dts: 'src/types/components.d.ts',
-				dirs: ['src/components/auto']
+				dts: fileURLToPath(new URL('./types/components.d.ts', import.meta.url)),
+				dirs: [fileURLToPath(new URL('./src/components/auto', import.meta.url))]
 			}),
 			Icons({
 				autoInstall: true
 			})
 		],
+		css: {
+			preprocessorOptions: {
+				scss: {
+					api: 'modern-compiler', // or "modern", "legacy"
+					// 引入全局的 Less 文件
+					additionalData: `@use "@/styles/custom.scss" as *;`
+				}
+			}
+		},
 		// 运行后本地预览的服务器
 		server: {
 			// 是否开启https

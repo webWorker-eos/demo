@@ -1,0 +1,10 @@
+// 修改element ui 样式
+.el-dialog {
+	background-image: linear-gradient(to bottom, #0d98ba, #0d97ba59) !important;
+	max-width: 90vw;
+
+	.el-dialog__close {
+		font-size: 20px !important;
+		color: #333 !important;
+	}
+}
