@@ -7,7 +7,7 @@
 		</div>
 		<div class="card-img">
 			<!-- 随机图片 -->
-			<img class=".img" src="`https://picsum.photos/300/300?random=${info?.id}`" />
+			<img :src="`https://picsum.photos/300/300?random=${info?.id}`" />
 		</div>
 		<div class="card-info">
 			<div class="name">#{{ info?.id }} {{ info?.name }}</div>
@@ -84,7 +84,7 @@ const handleComing = () => {
 
 	&:hover {
 		.card-img {
-			.img {
+			img {
 				transform: scale(1.1);
 			}
 		}
@@ -129,7 +129,7 @@ const handleComing = () => {
 		max-height: 300px;
 		object-fit: contain;
 
-		.img {
+		img {
 			display: block;
 			width: 100%;
 			height: 100%;
