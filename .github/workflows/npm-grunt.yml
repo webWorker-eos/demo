@@ -18,11 +18,10 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v4
 
-            - name: Setup Node.js 20.x
+            - name: Setup Node.js 20.18.1
               uses: actions/setup-node@v3
               with:
-                  node-version: '20.x'
-                  cache: 'npm'
+                  node-version: '20.18.1'
 
             - name: Install dependencies
               run: npm install
@@ -34,7 +33,7 @@ jobs:
               uses: peaceiris/actions-gh-pages@v3
               with:
                   branch: gh-pages
-                  publish_dir: ./dist
+                  publish_dir: ./
                   github_token: ${{ secrets.CICDDEMO }}
                   user_name: ${{ secrets.MY_NAME }}
                   user_email: ${{ secrets.MY_EMAIL }}
