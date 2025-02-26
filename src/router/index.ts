@@ -3,22 +3,22 @@ import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 // 动态导入模块
 const modules: Record<string, any> = import.meta.glob(['./modules/*.ts'], {
-  eager: true,
+	eager: true
 });
 const routes: Array<RouteRecordRaw> = [];
 Object.keys(modules).forEach((key) => {
-  routes.push(modules[key].default);
+	routes.push(modules[key].default);
 });
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+	history: createWebHistory(`${import.meta.env.VITE_BASE_BUILD || ''}/`),
+	routes
 });
 router.beforeEach(() => {
-  NProgress.start();
+	NProgress.start();
 });
 router.afterEach(() => {
-  NProgress.done();
+	NProgress.done();
 });
 
 export default router;
