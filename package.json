@@ -9,6 +9,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "vite --mode development",
 		"build": "vite build && cp dist/index.html dist/404.html",
+		"build:github": "vite build --mode github && cp dist/index.html dist/404.html",
 		"lint:eslint": "eslint --cache --max-warnings 0 {src,mock}/**/*.{vue,ts,tsx} --fix",
 		"lint:prettier": "prettier --write **/*.{js,json,tsx,css,less,scss,vue,html,md}"
 	},

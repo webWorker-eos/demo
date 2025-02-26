@@ -3,6 +3,9 @@
 		Home
 
 		<div>{{ userStore.name }}</div>
+
+		<!-- 跳转到 market 路由 -->
+		<router-link to="/market">Market</router-link>
 	</div>
 </template>
 
